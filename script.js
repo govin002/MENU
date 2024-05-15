@@ -30,7 +30,7 @@ function loadModel(buttonId) {
     // Check which button was clicked and set the corresponding model path
     switch(buttonId) {
         case "1":
-            modelPath = "burger.glb";
+            modelPath = "Burger.glb";
             break;
         case "2":
             modelPath = "steak_rice.glb";
