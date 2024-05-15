@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hotel - Menu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="main.css">
+</head>
+<body>
+   
+<section>
+    <div class="container">
+        <h1>Hotel Menu</h1>
+        <div class="items">
+            <div class="images">
+                <img src="image/product1.jpg" alt="burger" class="img img-1" />
+            </div>
+            <div class="description">
+                <p>
+                    <strong>Chicken Burger</strong> <br />
+                    A burger patty made from ground chicken, often seasoned with
+                    spices and herbs, and served on a bun with various toppings.
+                </p>
+               
+                <!-- Add class "ar-object" to this button -->
+                <button id="1" class="btn-product ar-object">
+                    Try on your place
+                </button>
+            </div>
+        </div>
+		<div class="items">
+            <div class="images">
+                <img src="image/product2.png" alt="steak_rice" class="img img-2" />
+            </div>
+            <div class="description">
+                <p>
+                    <strong>Steak Rice</strong> <br />
+                    A Steak Rice made content chicken, often seasoned with
+                    spices and herbs, and served on a bun with various toppings.
+                </p>
+                
+                <!-- Add class "ar-object" to this button -->
+                <button id="2" class="btn-product ar-object">
+                    Try on your place
+                </button>
+            </div>
+        </div>
+</section>
+<section>
+    <div class="container-canvas" id="container-canvas"></div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="importmap">
+{
+    "imports": {
+		
+        "three": "./build/three.module.js",
+        "three/addons/": "./jsm/"
+    }
+}
+</script>
+
+<script type="module" src="script.js">
+
+
+</script>
+</body>
+</html>
