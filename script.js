@@ -67,11 +67,11 @@ function loadModel(buttonId) {
 
 function init() {
     container = document.createElement('div');
-    document.getElementById("container-canvas").appendChild(container);
+    document.getElementById("container").appendChild(container);
     scene = new THREE.Scene();
 
 
-    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 200);
+    camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 200);
 
     //
 
