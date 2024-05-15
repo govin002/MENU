@@ -79,6 +79,13 @@ strong{
     color: #fff;
 }
 
+.btn-product:hover{
+   
+    background-color:#b7f1df;
+    color:#fff;
+}
+
+
 
   .price
   {
