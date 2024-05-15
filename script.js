@@ -43,6 +43,7 @@ function loadModel(buttonId) {
     // Remove the current object if exists
     if (current_object) {
         scene.remove(current_object);
+        current_object.visible=false;
         current_object = null;
     }
     
