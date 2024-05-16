@@ -182,7 +182,7 @@ class ARButton {
 			element.style.textAlign = 'center';
 			element.style.opacity = '0.5';
 			element.style.outline = 'none';
-			element.style.zIndex = '999';
+			element.style.zIndex = '1';
 
 		}
 
