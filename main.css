@@ -13,7 +13,7 @@ body {
     height: 100%;
     width: 100%;
     position: fixed;
-    z-index: 3;
+  z-index: 4;
     top: 0;
     left: 0;
     background-color: #111;
@@ -43,7 +43,7 @@ body {
     margin-top: 30px;
     transform:translate(-50%,-50%);
     text-align: center;
-    z-index: 3 ;
+    z-index: 3;
     position: fixed;
     color: #fff;
   }
@@ -83,24 +83,12 @@ body {
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
-    .title h1{font-size: 20px;}
+    .title h1{font-size: 15px;}
   }
 
-  @media (max-width: 100%) {
-    .sidenav {
-       width: 100%;
-       
-     }
-     .title h1{font-size: 20px;}
-   }
+ 
    
-   @media (min-width: 769px) {
-    .sidenav {
-       width: 100%; /* Adjust this value based on your design */
-     }
-     .title{font-size: 20px;}
-   }
-
+  
 
   #place-button {
     position: absolute;

@@ -181,9 +181,9 @@ let prevTouch = { x: 0, y: 0 };
 let isTouching = false;
 
 // Add touch event listeners with passive option set to false
-document.addEventListener('touchstart', onTouchStart, { passive: false });
-document.addEventListener('touchmove', onTouchMove, { passive: false });
-document.addEventListener('touchend', onTouchEnd, { passive: false });
+document.addEventListener('touchstart', onTouchStart, { passive: true });
+document.addEventListener('touchmove', onTouchMove, { passive:true });
+document.addEventListener('touchend', onTouchEnd, { passive: true });
 
 // Rest of your script remains unchanged
 
