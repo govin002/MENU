@@ -30,9 +30,16 @@ body {
     color: #818181;
     display: block;
     transition: 0.3s;
-    border: 2px solid #fff;
+
   }
   
+ .ar-object{
+    border: 2px solid #fff;
+    border-radius:2px;
+    margin: 2px;
+ }
+
+
   .sidenav a:hover {
     color: #f0f0f1;
   }
@@ -62,6 +69,17 @@ body {
     .sidenav a {font-size: 18px;}
   }
 
+  @media (max-width: 768px) {
+    .sidenav {
+       width: 100%;
+     }
+   }
+   
+   @media (min-width: 769px) {
+    .sidenav {
+       width: 250px; /* Adjust this value based on your design */
+     }
+   }
 
   #place-button {
     position: absolute;

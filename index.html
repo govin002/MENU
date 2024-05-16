@@ -59,13 +59,19 @@
 
     <script>
       function openNav() {
-        document.getElementById("mySidenav").style.width = "500px";
+        var x = document.getElementById("mySidenav");
+        if (window.innerWidth <= 768) {
+          x.style.width = "100%";
+        } else {
+          x.style.width = "250px"; // Adjust this value based on your design
+        }
       }
 
       function closeNav() {
-        document.getElementById("mySidenav").style.width = "0px";
+        document.getElementById("mySidenav").style.width = "0";
       }
     </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="importmap">
