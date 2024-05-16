@@ -1,4 +1,4 @@
-import * as THREE from './build/three.module.js'; // Adjust the path as needed
+import * as THREE from './build/three.module.js';
 import { ARButton } from './jsm/webxr/ARButton.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
@@ -10,51 +10,6 @@ let controller;
 let reticle, pmremGenerator, current_object, controls;
 let hitTestSource = null;
 let hitTestSourceRequested = false;
-
-init();
-animate();
-
-$(".ar-object").click(function(){
-    loadModel($(this).attr("id"));
-});
-
-$("#ARButton").click(function(){
-    current_object.visible=false;
-});
-
-function loadModel(buttonId) {
-    let modelPath;
-    switch(buttonId) {
-        case "1":
-            modelPath = "burger.glb";
-            break;
-        case "2":
-            modelPath = "steak_rice.glb";
-            break;
-        default:
-            return;
-    }
-    
-    if (current_object) {
-        scene.remove(current_object);
-        current_object = null;
-    }
-    
-    var loader = new GLTFLoader().setPath('3d/');
-    loader.load(modelPath, function (glb) {
-        current_object = glb.scene;
-        scene.add(current_object);
-
-        var box = new THREE.Box3();
-        box.setFromObject(current_object);
-        var center = new THREE.Vector3();
-        box.getCenter(center);
-        current_object.position.copy(center);
-        controls.target.copy(center);
-        controls.update();
-        render();
-    });
-}
 
 function init() {
     container = document.createElement('div');
@@ -140,7 +95,6 @@ function render(timestamp, frame) {
             hitTestSourceRequested = true;
         }
 
-
         if (hitTestSource) {
             const hitTestResults = frame.getHitTestResults(hitTestSource);
             if (hitTestResults.length) {
@@ -161,3 +115,54 @@ function onSelect() {
         current_object.visible=true;
     }
 }
+
+function loadModel(buttonId) {
+    let modelPath;
+    switch(buttonId) {
+        case "1":
+            modelPath = "burger.glb";
+            break;
+        case "2":
+            modelPath = "steak_rice.glb";
+            break;
+        default:
+            return;
+    }
+
+    if (current_object) {
+        scene.remove(current_object);
+        current_object = null;
+    }
+
+    var loader = new GLTFLoader().setPath('3d/');
+    loader.load(modelPath, function (glb) {
+        current_object = glb.scene;
+        scene.add(current_object);
+
+        var box = new THREE.Box3();
+        box.setFromObject(current_object);
+        var center = new THREE.Vector3();
+        box.getCenter(center);
+        current_object.position.copy(center);
+        controls.target.copy(center);
+        controls.update();
+        render();
+    });
+}
+
+function openNav() {
+    var x = document.getElementById("mySidenav");
+    if (window.innerWidth <= 768) {
+        x.style.width = "100%";
+    } else {
+        x.style.width = "250px"; // Adjust this value based on your design
+    }
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+// Initial setup
+init();
+animate();
