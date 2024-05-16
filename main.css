@@ -69,7 +69,7 @@ body {
     .sidenav a {font-size: 18px;}
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 100%) {
     .sidenav {
        width: 100%;
      }
