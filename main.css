@@ -77,7 +77,7 @@ body {
    
    @media (min-width: 769px) {
     .sidenav {
-       width: 250px; /* Adjust this value based on your design */
+       width: 100%; /* Adjust this value based on your design */
      }
    }
 
