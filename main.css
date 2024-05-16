@@ -20,7 +20,7 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 0px;
-    border: 2px solid #fff;
+   
   }
   
   .sidenav a {
@@ -30,6 +30,7 @@ body {
     color: #818181;
     display: block;
     transition: 0.3s;
+    border: 2px solid #fff;
   }
   
   .sidenav a:hover {
