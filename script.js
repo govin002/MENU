@@ -1,111 +1,76 @@
-import * as THREE from "./build/three.module.js";
-import { ARButton } from "./jsm/webxr/ARButton.js";
+import * as THREE from './build/three.module.js'; // Adjust the path as needed
+import { ARButton } from './jsm/webxr/ARButton.js';
+import { OrbitControls } from './jsm/controls/OrbitControls.js';
+import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+import { RGBELoader } from './jsm/loaders/RGBELoader.js';
 
-import { OrbitControls } from "./jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "./jsm/loaders/GLTFLoader.js";
-import { RGBELoader } from "./jsm/loaders/RGBELoader.js";
-
-var container;
-var camera, scene, renderer;
-var controller;
-
-var reticle, pmremGenerator, current_object, controls, isAR, envmap;
-
-var hitTestSource = null;
-var hitTestSourceRequested = false;
+let container;
+let camera, scene, renderer;
+let controller;
+let reticle, pmremGenerator, current_object, controls;
+let hitTestSource = null;
+let hitTestSourceRequested = false;
 
 init();
 animate();
 
-$(".ar-object").click(function () {
-  var modelId = $(this).attr("id");
-  if (current_object != null) {
-    scene.remove(current_object);
-  }
-  loadModel(modelId);
-  arPlace(); // Place the model when an item is clicked
+$(".ar-object").click(function(){
+    loadModel($(this).attr("id"));
 });
 
-$("#ARButton").click(function () {
-  current_object.visible = false;
-  isAR = true;
+$("#ARButton").click(function(){
+    current_object.visible=false;
 });
 
+$("#place-button").click(function()
+{
+    current_object.visible=false;
+})
 
-
-$("#place-button").click(function () {
-  arPlace();
-});
-
-function arPlace() {
-    // Remove any previously placed object
+function loadModel(buttonId) {
+    let modelPath;
+    switch(buttonId) {
+        case "1":
+            modelPath = "1.glb";
+            break;
+        case "2":
+            modelPath = "2.glb";
+            break;
+        default:
+            return;
+    }
+    
     if (current_object) {
         scene.remove(current_object);
         current_object = null;
     }
-
-    if (reticle.visible) {
-        // Check if reticle is visible
-        current_object = new THREE.Mesh(/* Create your object geometry */);
-        current_object.position.setFromMatrixPosition(reticle.matrix);
-        scene.add(current_object);
-    }
-}
-
-function loadModel(buttonId) {
-    var modelPath;
-  
-    switch(buttonId) {
-      case "1":
-        modelPath = "1.glb";
-        break;
-  
-      case "2":
-        modelPath = "2.glb";
-        break;
-  
-      default:
-        return;
-    }
-  
-    if (current_object) {
-      scene.remove(current_object);
-      current_object = null;
-    }
-  
-    var loader = new GLTFLoader().setPath("3d/");
+    
+    var loader = new GLTFLoader().setPath('3d/');
     loader.load(modelPath, function (glb) {
-      current_object = glb.scene;
-      scene.add(current_object);
-  
-      var box = new THREE.Box3();
-      box.setFromObject(current_object);
-      var center = new THREE.Vector3();
-      box.getCenter(center);
-      current_object.position.copy(center);
-      controls.target.copy(center);
-  
-      controls.update();
-      render();
+        current_object = glb.scene;
+        scene.add(current_object);
+
+        var box = new THREE.Box3();
+        box.setFromObject(current_object);
+        var center = new THREE.Vector3();
+        box.getCenter(center);
+        current_object.position.copy(center);
+        controls.target.copy(center);
+        controls.update();
+        render();
     });
-  }
-  
+}
 
 function init() {
     container = document.createElement('div');
-    document.getElementById('container').appendChild(container);
-
+    document.getElementById("container-canvas").appendChild(container);
     scene = new THREE.Scene();
-    window.scene = scene;
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.001, 200);
 
-    var directionalLight = new THREE.DirectionalLight(0xdddddd, 1);
-    directionalLight.position.set(0, 0, 1).normalize();
-    scene.add(directionalLight);
-
-    var ambientLight = new THREE.AmbientLight(0x222222);
-    scene.add(ambientLight);
+    const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 3);
+    light.position.set(0.5, 1, 0.25);
+    scene.add(light);
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -123,149 +88,136 @@ function init() {
     controls.target.set(0, 0, -0.2);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-
-   
-
-    // AR SETUP
-    let options = {
-        requiredFeatures: ['hit-test'],
-        optionalFeatures: ['dom-overlay'],
+      
+    initAR();
+    
+    let options={
+        requiredFeatures:["hit-test"],
+        optionalFeatures:["dom-overlay"],
     };
 
-    options.domOverlay = { root: document.getElementById('content') };
+    options.domOverlay={root:document.getElementById("content")};
 
-    document.body.appendChild(ARButton.createButton(renderer, options));
 
+    window.addEventListener('resize', onWindowResize);
+}
+
+function initAR() {
+    document.body.appendChild(ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] }));
+
+    controller = renderer.xr.getController(0);
+    controller.addEventListener('select', onSelect);
+    scene.add(controller);
     reticle = new THREE.Mesh(
-        new THREE.CircleGeometry(0.1, 32), // Use CircleGeometry instead of RingBufferGeometry
+        new THREE.RingGeometry(0.15, 0.2, 32).rotateX(-Math.PI / 2),
         new THREE.MeshBasicMaterial()
     );
+
     reticle.matrixAutoUpdate = false;
     reticle.visible = false;
     scene.add(reticle);
-
-    window.addEventListener('resize', onWindowResize, false);
-
-    renderer.domElement.addEventListener('touchstart', function (e) {
-        e.preventDefault();
-        touchDown = true;
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
-    }, false);
-
-    renderer.domElement.addEventListener('touchend', function (e) {
-        e.preventDefault();
-        touchDown = false;
-    }, false);
-
-    renderer.domElement.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-
-        if (!touchDown) {
-            return;
-        }
-
-        deltaX = e.touches[0].pageX - touchX;
-        deltaY = e.touches[0].pageY - touchY;
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
-
-        rotateObject();
-    }, false);
-}
-
-  renderer.domElement.addEventListener(
-    "touchmove",
-    function (e) {
-      e.preventDefault();
-
-      if (!touchDown) {
-        return;
-      }
-
-      deltaX = e.touches[0].pageX - touchX;
-      deltaY = e.touches[0].pageY - touchY;
-      touchX = e.touches[0].pageX;
-      touchY = e.touches[0].pageY;
-
-      rotateObject();
-    },
-    false
-  );
-
-
-var touchDown, touchX, touchY, deltaX, deltaY;
-
-function rotateObject() {
-  if (current_object && reticle.visible) {
-    current_object.rotation.y += deltaX / 100;
-  }
 }
 
 function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-//
-
 function animate() {
-  renderer.setAnimationLoop(render);
-  requestAnimationFrame(animate);
-  controls.update();
+    renderer.setAnimationLoop(render);
+    requestAnimationFrame(animate);
+    controls.update();
 }
 
 function render(timestamp, frame) {
-  if (frame && isAR) {
-    var referenceSpace = renderer.xr.getReferenceSpace();
-    var session = renderer.xr.getSession();
-
-    if (hitTestSourceRequested === false) {
-      session
-        .requestReferenceSpace("viewer")
-        .then(function (referenceSpace) {
-          session
-            .requestHitTestSource({ space: referenceSpace })
-            .then(function (source) {
-              hitTestSource = source;
+    if (frame) {
+        const referenceSpace = renderer.xr.getReferenceSpace();
+        const session = renderer.xr.getSession();
+        if (hitTestSourceRequested === false) {
+            session.requestReferenceSpace('viewer').then(function (referenceSpace) {
+                session.requestHitTestSource({ space: referenceSpace }).then(function (source) {
+                    hitTestSource = source;
+                });
             });
-        });
+            session.addEventListener('end', function () {
+                hitTestSourceRequested = false;
+                hitTestSource = null;
 
-      session.addEventListener("end", function () {
-        hitTestSourceRequested = false;
-        hitTestSource = null;
+                reticle.visible=false;
+                var box = new THREE.Box3();
+                box.setFromObject(current_object);
+                box.getCenter(controls.target)
+            });
 
-        isAR = false;
+            hitTestSourceRequested = true;
+        }
 
-        reticle.visible = false;
 
-        document.getElementById("place-button").style.display = "none";
-      });
-
-      hitTestSourceRequested = true;
+        if (hitTestSource) {
+            const hitTestResults = frame.getHitTestResults(hitTestSource);
+            if (hitTestResults.length) {
+                const hit = hitTestResults[0];
+                reticle.visible = true;
+                reticle.matrix.fromArray(hit.getPose(referenceSpace).transform.matrix);
+            } else {
+                reticle.visible = false;
+            }
+        }
     }
+    renderer.render(scene, camera);
+}
 
-    if (hitTestSource) {
-      var hitTestResults = frame.getHitTestResults(hitTestSource);
-
-      if (hitTestResults.length) {
-        var hit = hitTestResults[0];
-
-        document.getElementById("place-button").style.display = "block";
-
-        reticle.visible = true;
-        reticle.matrix.fromArray(
-          hit.getPose(referenceSpace).transform.matrix
-        );
-      } else {
-        reticle.visible = false;
-
-        document.getElementById("place-button").style.display = "none";
-      }
+function onSelect() {
+    if (reticle.visible) {
+        current_object.position.setFromMatrixPosition(reticle.matrix);
+        current_object.visible=true;
     }
-  }
+}
 
-  renderer.render(scene, camera);
+// Add touch event listeners to rotate and scale the placed object
+let touch = { x: 0, y: 0 };
+let prevTouch = { x: 0, y: 0 };
+let isTouching = false;
+
+// Add touch event listeners with passive option set to false
+document.addEventListener('touchstart', onTouchStart, { passive: false });
+document.addEventListener('touchmove', onTouchMove, { passive: false });
+document.addEventListener('touchend', onTouchEnd, { passive: false });
+
+// Rest of your script remains unchanged
+
+function onTouchStart(event) {
+    event.preventDefault();
+    let touchEvent = event.touches[0];
+    touch.x = touchEvent.clientX;
+    touch.y = touchEvent.clientY;
+    prevTouch.x = touch.x;
+    prevTouch.y = touch.y;
+    isTouching = true;
+}
+
+function onTouchMove(event) {
+    event.preventDefault();
+    if (!isTouching || !current_object) return; // Ensure current_object is defined
+    let touchEvent = event.touches[0];
+    let deltaX = touchEvent.clientX - prevTouch.x;
+    let deltaY = touchEvent.clientY - prevTouch.y;
+    // Check if current_object has a rotation method before calling rotateY
+    if (current_object.rotateY) {
+        current_object.rotateY(deltaX * 0.01);
+    }
+    // Check if current_object has a scale property before calling multiplyScalar
+    if (current_object.scale) {
+        current_object.scale.multiplyScalar(1 + deltaY * 0.01);
+    }
+    prevTouch.x = touchEvent.clientX;
+    prevTouch.y = touchEvent.clientY;
+    render();
+}
+
+
+function onTouchEnd(event) {
+    event.preventDefault();
+    isTouching = false;
 }
