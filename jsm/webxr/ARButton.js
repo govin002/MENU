@@ -171,6 +171,7 @@ class ARButton {
 
 			element.style.position = 'absolute';
 			element.style.bottom = '20px';
+			element.style.left = '50%';
 			element.style.padding = '12px 6px';
 			element.style.border = '1px solid #fff';
 			element.style.borderRadius = '4px';
