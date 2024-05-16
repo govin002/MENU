@@ -38,11 +38,18 @@ $("#place-button").click(function () {
 });
 
 function arPlace() {
-  if (reticle.visible && current_object) {
-    // Check if reticle is visible and model is loaded
-    current_object.position.setFromMatrixPosition(reticle.matrix);
-    current_object.visible = true;
-  }
+    // Remove any previously placed object
+    if (current_object) {
+        scene.remove(current_object);
+        current_object = null;
+    }
+
+    if (reticle.visible) {
+        // Check if reticle is visible
+        current_object = new THREE.Mesh(/* Create your object geometry */);
+        current_object.position.setFromMatrixPosition(reticle.matrix);
+        scene.add(current_object);
+    }
 }
 
 function loadModel(buttonId) {
