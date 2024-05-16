@@ -63,11 +63,12 @@
       animate();
 
       $(".ar-object").click(function () {
+        var modelId = $(this).attr("id");
         if (current_object != null) {
           scene.remove(current_object);
         }
-
-        loadModel($(this).attr("id"));
+        loadModel(modelId);
+        arPlace(); // Place the model when an item is clicked
       });
 
       $("#ARButton").click(function () {
@@ -85,7 +86,8 @@
       });
 
       function arPlace() {
-        if (reticle.visible) {
+        if (reticle.visible && current_object) {
+          // Check if reticle is visible and model is loaded
           current_object.position.setFromMatrixPosition(reticle.matrix);
           current_object.visible = true;
         }
@@ -107,8 +109,6 @@
             loader.load(model + ".glb", function (glb) {
               current_object = glb.scene;
               scene.add(current_object);
-
-              arPlace();
 
               var box = new THREE.Box3();
               box.setFromObject(current_object);
@@ -276,10 +276,6 @@
               isAR = false;
 
               reticle.visible = false;
-
-              var box = new THREE.Box3();
-              box.setFromObject(current_object);
-              box.center(controls.target);
 
               document.getElementById("place-button").style.display = "none";
             });
