@@ -1,147 +1,73 @@
+
 *{
     margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    text-transform: capitalize;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: black;
+    padding: 0;
 }
-
-strong{
-    padding-bottom: 50px;
-    text-decoration: dashed;
-}
-
-.container {
-    
-    justify-content: center;
-    align-items: center; 
-    margin-left: 50px; 
-}
-
-
-.container h1{
-    text-align: center;
-    font-size: 40px;
-    padding: 15px;
-    color: #fff;
-}
-
-  
-
-.items{
-    display: flex;
-    border-color: #fff;   
-    justify-content: center;
-    align-items: center; 
-    margin: 15px;
-    width: 100%;
-    
-}
-
-.images{
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    
-
-}
-.images .img{
-    border-radius: 50%;
-    padding: 2px;
-    width: 140px;
-    height: 140px;
-    border: 2px solid #fff;
-  
-
-}
-.description{
-    width: 500px;
-    padding: 20px;
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    color: #fff;
-
-}
-
-
-.btn-product{
-    margin-top: 8px;
-    width: 100px;
-    height: 25px;
-    padding: 2px;
-    border: none;
-    border-radius: 20px;
-    font-weight: 300;
-    font-size: 10px;
-    background-color:rgba(207, 224, 57, 0.919);
-    color: #fff;
-}
-
-.btn-product:hover{
-   
-    background-color:#b7f1df;
-    color:#fff;
-}
-
-
-
-  .price
-  {
-    top: 0;
-    margin-left: 25px;
-    display: flex;
+body {
+    font-family: "Lato", sans-serif;
+    background-color:rgb(42, 46, 46);
   }
   
-.columns {
-    
-    column-count:3;
- 
-    column-rule: 2px solid #3366FF;
-  }
-
-  .videoPopup {
-    position: fixed;
-    justify-content: center;
-    top: 0;
-
-    left: 0;
-    width: 100%;
+  .sidenav {
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); 
-    z-index: 1000; 
-}
-
-.productVideo {
-    max-width: 50%;
-    max-height: 50%;
-    margin-top: 50px;
-    margin-left: 25%;
-    display: block;
-}
-
-.close{
-    position:absolute;
-    top: 5px;
-    right: 20px;
-    font-size: 25px;
-    font-weight: bolder;
-    z-index: 100;
-    color: #fff;
-    cursor: pointer;
-}
-
-.container-canvas
-{
+    width: 0;
     position: fixed;
-    background-color: aqua;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 0px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f0f0f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+.images{
+
+    border-radius: 50%;
+  }
+
+
+.img{
+    border-radius: 50%;
+      height: 100px;
+      width: 100px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+
+  #place-button {
+    position: absolute;
+    bottom: 20px; /* Adjust the bottom position as needed */
+    left: 50%; /* Position the button at the center horizontally */
+    transform: translateX(-50%); /* Center the button horizontally */
+    width: 100px;
+    height: 35px;
+    display: none;
+    
 }
-
-  @media (max-width: 768px) {
-    .container {
-         flex-direction: column; /* Stack items vertically on small screens */
-     }
-    }
-
-   
