@@ -19,35 +19,27 @@ $(".ar-object").click(function(){
 });
 
 $("#ARButton").click(function(){
-
     current_object.visible=false;
+});
 
-})
-
-//
 function loadModel(buttonId) {
     let modelPath;
-    // Check which button was clicked and set the corresponding model path
     switch(buttonId) {
         case "1":
-            modelPath = "Burger.glb";
+            modelPath = "burger.glb";
             break;
         case "2":
             modelPath = "steak_rice.glb";
             break;
-        // Add cases for other buttons if needed
         default:
             return;
     }
     
-    // Remove the current object if exists
     if (current_object) {
         scene.remove(current_object);
-        current_object.visible=false;
         current_object = null;
     }
     
-    // Load the model
     var loader = new GLTFLoader().setPath('3d/');
     loader.load(modelPath, function (glb) {
         current_object = glb.scene;
@@ -57,38 +49,27 @@ function loadModel(buttonId) {
         box.setFromObject(current_object);
         var center = new THREE.Vector3();
         box.getCenter(center);
-        current_object.position.copy(center); // Set object's position to the center
-        controls.target.copy(center); // Adjust controls target to center of the object
-        controls.update(); // Update controls
+        current_object.position.copy(center);
+        controls.target.copy(center);
+        controls.update();
         render();
     });
 }
 
-
 function init() {
     container = document.createElement('div');
-    document.getElementById("container").appendChild(container);
+    document.getElementById("container-canvas").appendChild(container);
     scene = new THREE.Scene();
 
-
-    camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 200);
-
-    //
+    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.001, 200);
 
     const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 3);
-    //
     light.position.set(0.5, 1, 0.25);
     scene.add(light);
 
-
-
-
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
     renderer.setPixelRatio(window.devicePixelRatio);
-
     renderer.setSize(window.innerWidth, window.innerHeight);
-
     renderer.xr.enabled = true;
     container.appendChild(renderer.domElement);
 
@@ -100,32 +81,16 @@ function init() {
     controls.minDistance = 2;
     controls.maxDistance = 10;
     controls.target.set(0, 0, -0.2);
-    controls.enableDamping=true;
-    controls.dampingFactor=0.05;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
 
+    initAR();
 
-    //
+    window.addEventListener('resize', onWindowResize);
+}
 
+function initAR() {
     document.body.appendChild(ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] }));
-
-    const geometry = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32).translate(0, 0.1, 0);
-
-    //
-    function onSelect() {
-
-        if (reticle.visible) {
-
-            // const material = new THREE.MeshPhongMaterial({ color: 0xffffff * Math.random() });
-            // const mesh = new THREE.Mesh(geometry, material);
-            // reticle.matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
-            // mesh.scale.y = Math.random() * 2 + 1;
-            // scene.add(mesh);
-            current_object.position.setFromMatrixPosition(reticle.matrix);
-            current_object.visible=true;
-            
-        }
-    }
-
 
     controller = renderer.xr.getController(0);
     controller.addEventListener('select', onSelect);
@@ -138,7 +103,6 @@ function init() {
     reticle.matrixAutoUpdate = false;
     reticle.visible = false;
     scene.add(reticle);
-    window.addEventListener('resize', onWindowResize);
 }
 
 function onWindowResize() {
@@ -149,7 +113,7 @@ function onWindowResize() {
 
 function animate() {
     renderer.setAnimationLoop(render);
-    requestAnimationFrame(animate); // Move this line inside the function
+    requestAnimationFrame(animate);
     controls.update();
 }
 
@@ -168,9 +132,9 @@ function render(timestamp, frame) {
                 hitTestSource = null;
 
                 reticle.visible=false;
-                var box = new THREE.Box3(); // Use Box3 instead of BOX3
+                var box = new THREE.Box3();
                 box.setFromObject(current_object);
-                box.getcenter(controls.target)
+                box.getCenter(controls.target)
             });
 
             hitTestSourceRequested = true;
@@ -189,4 +153,11 @@ function render(timestamp, frame) {
         }
     }
     renderer.render(scene, camera);
+}
+
+function onSelect() {
+    if (reticle.visible) {
+        current_object.position.setFromMatrixPosition(reticle.matrix);
+        current_object.visible=true;
+    }
 }
