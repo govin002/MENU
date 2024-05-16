@@ -11,9 +11,9 @@ body {
   
   .sidenav {
     height: 100%;
-    width: 400px;
+    width: 100%;
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     top: 0;
     left: 0;
     background-color: #111;
