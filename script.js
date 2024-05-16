@@ -5,7 +5,7 @@ import { VRButton } from './jsm/webxr/VRButton.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
 import { RGBELoader } from './jsm/loaders/RGBELoader.js';
-import { RoughnessMipmapper } from './jsm/utils/RoughnessMipmapper.js';
+
 
 var container;
 var camera, scene, renderer;
