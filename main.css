@@ -135,7 +135,7 @@ margin-top: 15px;
   }
   .images span{
     display: block;
-    font-size: 12px;
+    font-size: 8px;
     font-weight: bold;
     text-align: center;
   }
@@ -180,5 +180,9 @@ margin-top: 15px;
     font-size: 20px;
     text-decoration: none; /* Ensure paragraphs within columns don't underline */
 }
+ .images span{
+  font-size: 14px;
+    font-weight: bold;
+ }
   /* Add any other adjustments needed for larger screens */
 }
