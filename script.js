@@ -36,6 +36,13 @@ function loadModel(buttonId) {
         case "2":
             modelPath = "2.glb";
             break;
+        case "3":
+            modelPath = "3.glb";
+            break;
+        case "4":
+                modelPath = "4.glb";
+                break;
+
         default:
             return;
     }
@@ -188,7 +195,7 @@ document.addEventListener('touchend', onTouchEnd, { passive: true });
 // Rest of your script remains unchanged
 
 function onTouchStart(event) {
-    event.preventDefault();
+    
     let touchEvent = event.touches[0];
     touch.x = touchEvent.clientX;
     touch.y = touchEvent.clientY;
