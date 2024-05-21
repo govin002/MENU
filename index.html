@@ -9,83 +9,207 @@
   <body>
     <div id="content">
       <div id="mySidenav" class="sidenav">
-        <a
+        <!-- <a
           href="javascript:void(0)"
           class="closebtn"
           onclick="closeNav()"
           style="float: inline-end"
           >&times;</a
+        > -->
+        <span
+          href="javascript:void(0)"
+          class="closebtn"
+          onclick="closeNav()"
+          style="float: inline-end; color: #fff"
+          >&times;</span
         >
-        <a
-          class="title"
-          style="color: #fff; margin-bottom: 50px; font-size: 20px"
-        >
-          <h1>Hotel Menu</h1></a
-        >
+
+        <div style="top: 0; height: 120px; display: flex">
+          <img
+            src="image/logo.png"
+            alt="logo"
+            style="
+              background: #000;
+              height: 60px;
+              width: 60px;
+              margin-left: 20px;
+              margin-top: 20px;
+              border-radius: 50%;
+              border: 2px solid #e4e72e;
+            "
+          />
+
+          <h2
+            style="
+              color: #fff;
+              margin-left: 50px;
+              top: 10;
+              text-align: center;
+              margin-top: 30px;
+            "
+          >
+            Hotel Menu
+          </h2>
+        </div>
+
         <a class="ar-object" id="1" href="#" onclick="closeNav();">
-          <div class="images">
-            <img src="image/product1.jpg" alt="burger" class="img img-1" />
-          </div>
-          <div class="description">
-            <p>
-              <strong>Chicken Burger</strong> <br />
-              A burger patty made from ground chicken, often seasoned with
-              spices and herbs, and served on a bun with various toppings.
-            </p>
+          <div style="display: flex">
+            <div class="images">
+              <img src="image/product1.jpg" alt="burger" class="img img-1" />
+              <span>Chicken Burger</span>
+            </div>
+
+            <div class="description">
+              <p>
+                <strong style="font-size: 12px">Chicken Burger</strong> <br />
+                A burger patty made from ground chicken, often seasoned with
+                <br />
+                spices and herbs, and served on a bun with various toppings.
+              </p>
+            </div>
+
+            <div class="columns">
+              <p>Small</p>
+              <br />
+              <span style="margin-left: 15x">₹ 125</span>
+              <p>Medium</p>
+              <br />
+              <span style="margin-left: 15x">₹ 160</span>
+              <p>Large</p>
+              <br />
+              <span style="margin-left: 15x">₹ 180</span>
+            </div>
           </div>
         </a>
         <a class="ar-object" id="2" href="#" onclick="closeNav();">
-          <div class="images">
-            <img src="image/product2.png" alt="Steak_rice" class="img img-2" />
-          </div>
-          <div class="description">
-            <p>
-              <strong>Steak Rice</strong> <br />
-              A Steak Rice made content chicken, often seasoned with spices and
-              herbs, and served on a bun with various toppings.
-            </p>
+          <div style="display: flex">
+            <div class="images">
+              <img
+                src="image/product2.png"
+                alt="Steak_rice"
+                class="img img-2"
+              />
+              <span>Steak Rice</span>
+            </div>
+            <div class="description">
+              <p>
+                <strong style="font-size: 12px">Steak Rice</strong> <br />
+                A Steak Rice made content chicken, often seasoned with spices
+                and<br />
+                herbs, and served on a bun with various toppings.
+              </p>
+            </div>
+
+            <div class="columns">
+              <p>Small</p>
+              <br />
+              <span style="margin-left: 15x">₹ 125</span>
+              <p>Medium</p>
+              <br />
+              <span style="margin-left: 15x">₹ 160</span>
+              <p>Large</p>
+              <br />
+              <span style="margin-left: 15x">₹ 180</span>
+            </div>
           </div>
         </a>
         <a class="ar-object" id="3" href="#" onclick="closeNav();">
-          <div class="images">
-            <img src="image/product3.png" alt="Steak_rice" class="img img-3" />
-          </div>
-          <div class="description">
-            <p>
-              <strong>Cake</strong> <br />
-              A Steak Rice made content chicken, often seasoned with spices and
-              herbs, and served on a bun with various toppings.
-            </p>
+          <div style="display: flex">
+            <div class="images">
+              <img
+                src="image/product3.png"
+                alt="Steak_rice"
+                class="img img-3"
+              />
+              <span>Cake</span>
+            </div>
+            <div class="description">
+              <p>
+                <strong style="font-size: 12px">Cake</strong> <br />
+
+                Cake made from flour, sugar, eggs, and flavorings, often adorned
+                with frosting, <br />
+                enjoyed on various occasions.
+              </p>
+            </div>
+
+            <div class="columns">
+              <p>Small</p>
+              <br />
+              <span style="margin-left: 15x">₹ 125</span>
+              <p>Medium</p>
+              <br />
+              <span style="margin-left: 15x">₹ 160</span>
+              <p>Large</p>
+              <br />
+              <span style="margin-left: 15x">₹ 180</span>
+            </div>
           </div>
         </a>
         <a class="ar-object" id="4" href="#" onclick="closeNav();">
-          <div class="images">
-            <img src="image/product4.jpg" alt="DONUT" class="img img-4" />
-          </div>
-          <div class="description">
-            <p>
-              <strong>Donut chocolate</strong> <br />
-              This is a Chocolate Donut with sprinkles.
-            </p>
+          <div style="display: flex">
+            <div class="images">
+              <img src="image/product4.jpg" alt="DONUT" class="img img-4" />
+              <span>Donut chocolate</span>
+            </div>
+            <div class="description">
+              <p>
+                <strong style="font-size: 12px">Donut chocolate</strong> <br />
+                This is a Chocolate Donut with sprinkles.
+              </p>
+            </div>
+
+            <div class="columns">
+              <p>Small</p>
+              <br />
+              <span style="margin-left: 15x">₹ 125</span>
+              <p>Medium</p>
+              <br />
+              <span style="margin-left: 15x">₹ 160</span>
+              <p>Large</p>
+              <br />
+              <span style="margin-left: 15x">₹ 130</span>
+            </div>
           </div>
         </a>
       </div>
-      <div
-        class="container-canvas"
-        id="container-canvas"
-        style="position: fixed"
-      ></div>
-      <span
-        style="
-          font-size: 30px;
-          cursor: pointer;
-          position: absolute;
-          color: aliceblue;
-        "
-        onclick="openNav()"
-        >&#9776;</span
-      >
-      <button type="button" id="place-button">Place</button>
+      <div style="top: 0; height: 120px">
+        <span
+          style="
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+            color: aliceblue;
+            float: inline-start;
+          "
+          onclick="openNav()"
+        >
+          <img
+            src="image/logo.png"
+            alt="logo"
+            style="
+              background: #000;
+              height: 60px;
+              width: 60px;
+              margin-left: 20px;
+              margin-top: 20px;
+              border-radius: 50%;
+              border: 2px solid #e4e72e;
+            "
+          />
+        </span>
+
+        <h2 style="color: #fff; padding-top: 50px; text-align: center">
+          Hotel Menu
+        </h2>
+        <div
+          class="container-canvas"
+          id="container-canvas"
+          style="position: fixed"
+        ></div>
+      </div>
     </div>
 
     <script>
