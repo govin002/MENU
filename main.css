@@ -27,6 +27,7 @@ body {
 
 }
 
+
 .sidenav a {
   gap: 20px;
   padding: 8px 8px 8px 14px;
@@ -110,7 +111,9 @@ margin-top: 15px;
 @media screen and (max-width: 450px) {
   .sidenav {padding-top: 0px;}
   .sidenav a {font-size: 18px;}
-   h2{font-size: 25px;}
+   h2{font-size: 30px;
+  margin-left: 20%;
+}
    .description p { display: block;}
    .img{
     border-radius: 50%;
@@ -163,13 +166,18 @@ margin-top: 15px;
  .sidenav a {
     font-size: 25px;
   }
+
+  h2{font-size: 35px;
+    margin-left: 50%;
+  }
  .description{
     width:800px;
-    font-size: 30px;
+    font-size: 20px;
+    margin-left: 100px;
   }
 .columns {
-  margin-top: 30px;
-  margin-left: 8px;
+  margin-top: 10px;
+  margin-left: 30px;
   width: fit-content;
   }
  .columns p {
