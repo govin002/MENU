@@ -2,7 +2,7 @@ import * as THREE from './build/three.module.js'; // Adjust the path as needed
 import { ARButton } from './jsm/webxr/ARButton.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
-import { RGBELoader } from './jsm/loaders/RGBELoader.js';
+
 
 let container;
 let camera, scene, renderer;
