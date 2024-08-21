@@ -108,64 +108,11 @@ margin-top: 15px;
   display: block;
 }
 
-
-
-
-
- 
-/* Additional Media Query for Larger Screens */
-@media screen and (max-width: 1024px) {
-.sidenav {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  background-color: #010101;
-  overflow-x: hidden;
-  transition: 0.5s;
-  justify-content: center;
-  align-items: center;
-  }
- .sidenav a {
-    font-size: 25px;
-  }
-
-  h2{
-    font-size: 35px;
-    
-   
-  }
- .description{
-    width:800px;
-    font-size: 20px;
-    margin-left: 100px;
-  }
-.columns {
-  margin-top: 10px;
-  margin-left: 30px;
-  width: fit-content;
-  }
- .columns p {
-      font-size: 30px;
-      text-decoration: none; /* Ensure paragraphs within columns don't underline */
-  }
-  .columns span{
-    font-size: 20px;
-    text-decoration: none; /* Ensure paragraphs within columns don't underline */
-}
- .images span{
-  font-size: 14px;
-    font-weight: bold;
- }
-  /* Add any other adjustments needed for larger screens */
-}
 @media screen and (max-width: 450px) {
   .sidenav {padding-top: 0px;}
   .sidenav a {font-size: 18px;}
    h2{font-size: 30px;
-  margin-left: 50%;
+  margin-left: 20%;
 }
    .description p { display: block;}
    .img{
@@ -197,3 +144,53 @@ margin-top: 15px;
   }
 }
  
+
+
+
+ 
+/* Additional Media Query for Larger Screens */
+@media screen and (min-width: 1024px) {
+.sidenav {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  background-color: #010101;
+  overflow-x: hidden;
+  transition: 0.5s;
+  justify-content: center;
+  align-items: center;
+  }
+ .sidenav a {
+    font-size: 25px;
+  }
+
+  h2{font-size: 35px;
+   ;
+  }
+ .description{
+    width:800px;
+    font-size: 20px;
+    margin-left: 100px;
+  }
+.columns {
+  margin-top: 10px;
+  margin-left: 30px;
+  width: fit-content;
+  }
+ .columns p {
+      font-size: 30px;
+      text-decoration: none; /* Ensure paragraphs within columns don't underline */
+  }
+  .columns span{
+    font-size: 20px;
+    text-decoration: none; /* Ensure paragraphs within columns don't underline */
+}
+ .images span{
+  font-size: 14px;
+    font-weight: bold;
+ }
+  /* Add any other adjustments needed for larger screens */
+}
