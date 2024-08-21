@@ -114,7 +114,7 @@ margin-top: 15px;
 
  
 /* Additional Media Query for Larger Screens */
-@media screen and (min-width: 1024px) {
+@media screen and (max-width: 1024px) {
 .sidenav {
   height: 100%;
   width: 100%;
