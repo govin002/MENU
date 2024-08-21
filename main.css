@@ -132,8 +132,10 @@ margin-top: 15px;
     font-size: 25px;
   }
 
-  h2{font-size: 35px;
-   ;
+  h2{
+    font-size: 35px;
+    margin-left:500px;
+   
   }
  .description{
     width:800px;
